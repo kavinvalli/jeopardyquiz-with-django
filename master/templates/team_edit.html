@@ -1,0 +1,59 @@
+if request.POST.get('teamstatus'):
+            question.team_choose = request.POST.get('teamstatus')
+            print('for save' + question.team_choose)
+            question.save()
+            print('after save ' + question.team_choose)
+
+            <!-- <ul>
+                    <li>Currently logged in as: {{ user.username }}</li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                </ul> -->
+                <!-- {% if tournament %} {% for tournament in tournament %}
+                <a href="{% url 'jeopardy' tournament.id %}">Continue with {{tournament.tournament_name}} Tournament</a>
+                {% endfor %}
+                <button><a href="{% url 'createtournament' %}">Create a new tournament</a></button> {% else %}
+                <a href="{% url 'createtournament' %}">Create a new tournament</a> {% endif %} -->
+
+                  <!-- 
+    <div class="container justify-content-center">
+        <div class="accordion" id="accordionExample">
+            {% for level in levels %}
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse{{level.id}}" aria-expanded="false" aria-controls="collapse{{level.id}}">
+                            {{level.level_name}}
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapse{{level.id}}" class="collapse" aria-labelledby="heading{{level.id}}" data-parent="#accordionExample">
+                    <div class="card-body">
+                        {% for category in level.category_set.all %}
+                        <a href="{% url 'category'  tournament.id category.id %}">
+                            {{category.category_name}}<br>
+                        </a> {% endfor %}
+                        <a type="button" class="btn btn-primary" href="{% url 'createcategory' tournament.id level.id %}">Create category</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div>
+            {% for team in teams %} {{team.team_name}} {% endfor %}
+            <a type="button" class="btn btn-primary" href="{% url 'createteam' tournament.id %}">Create team</a>
+        </div>
+
+    </div>
+    <div class="justify-content-center">
+        <a type="button" class="btn btn-primary" href="/master/">Go back</a>
+    </div>
+    <a type="button" class="btn btn-primary" href="{% url 'createlevel' tournament.id %}">Create Levels</a>
+ -->
+
+ <!-- {% for level in tournament.level_set.all %}
+                        {% for category in level.category_set.all %}
+                        {% for question in category.question_set.all %} -->
+
+                        <!-- {% endfor %}
+                        {% endfor %}
+                        {% endfor %} -->

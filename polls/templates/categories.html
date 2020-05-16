@@ -1,0 +1,112 @@
+<!--{{level}}-->
+<html>
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'polls/category.css' %}">
+</head>
+
+<body>
+
+
+    <!-- <div class="bannercat">
+<h1>{{ level.level_name }}- Choose the Categories/Question</h1>
+</div>
+
+<div class="container" style="padding-top:18px;">
+        <div class="row">
+
+        {% for category in level.category_set.all %}
+
+    <div class="card">
+  <img src="{{category.image_url}}" class="card-img-top" alt="..." >
+  <div class="card-body">
+    <h5 class="card-title">{{category.category_name}}</h5>
+      <ul class="w3-ul">
+      {% for question in category.question_set.all %}
+
+      <p class="card-text">
+        <li>
+              {% if question.status == "RA" %}
+              <strike><span style="color:#27ae60">Question Marks-{{question.marks_alloted}}</span></strike>
+              {% elif question.status == "WA" %}
+              <strike><span style="color:#e74c3c">Question Marks-{{question.marks_alloted}}</span></strike>
+              {% elif question.status == "PQ" %}
+              <mark><a href="/polls/{{question.level.id}}/{{category.id}}/{{question.id}}" style="color:#363062">Question Marks-{{question.marks_alloted}}/2</a></mark>
+              {% else %}
+              <a href="/polls/{{question.level.id}}/{{category.id}}/{{question.id}}" style="color:#000">Question Marks-{{question.marks_alloted}}</a>
+              {% endif %}
+          </li>
+
+      </p>
+
+      {% endfor %}
+      </ul>
+<!--    <a href="/polls/{{level.id}}/{{category.id}}" class="btn btn-primary">Category</a>-->
+    <!-- </div>
+</div>
+        {% endfor %}
+    </div>
+
+            </div>
+        </div>
+    </div> -->
+
+
+
+
+    <!-- <div class="board">
+    <div class="row categories">
+      {% for category in level.category_set.all %}
+      <div class="tile">{{category.category_name}}</div>
+      {% endfor %}
+
+    </div>
+  </div> -->
+
+    <div class="board">
+
+        {% for category in level.category_set.all %}
+        <div class="row categories">
+            <div class="tile">{{category.category_name}}</div>
+            {% for question in category.question_set.all %}
+            <div class="tile">
+                <div class="question-value">
+                    {% if question.status == "RA" %}
+                    <span class="ra">{{question.marks_alloted}}</span> {% elif question.status == "WA" %}
+                    <span class="wa">{{question.marks_alloted}}</span> {% elif question.status == "PQ" %}
+                    <a class="pq" href="/polls/{{tournament.id}}/{{question.level.id}}/{{category.id}}/{{question.id}}">{{question.marks_alloted}}</a> {% else %}
+                    <a href="/polls/{{tournament.id}}/{{question.level.id}}/{{category.id}}/{{question.id}}">{{question.marks_alloted}}</a> {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="team">
+        <!-- <button type="button" class="btn btn-info" action="polls/{{level.id}}/" method="post">Reset Question Status</button> -->
+        {% for team in team %} {% if team.id == teamchoose.id %}
+        <div style="width: 100%">
+            <div class="tile-e">{{team.team_name}}</div>
+            <div class="tile-e">{{team.team_points}}</div>
+        </div>
+        {% else %}
+        <div style="width: 100%">
+            <div class="tileui">{{team.team_name}}</div>
+            <div class="tileui">{{team.team_points}}</div>
+        </div>
+        {% endif %} {% endfor %}
+    </div>
+
+
+
+
+
+
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,333 @@
+html{
+    height:100%
+}
+
+body {
+    margin:0;
+    background: linear-gradient(to top left, #008, #00f);
+    color:white;
+    padding-bottom: 100px;
+    height: 100%;
+}
+
+li {
+    list-style: none;
+}
+
+#answers {
+    font-size:20px;
+}
+.top {
+    background:#1962c0;
+    /* text-align: center; */
+    width:100%;
+    display: inline-block;
+    padding:18px;
+    height:auto;
+    color:white;
+}
+
+li.catmark {
+    display: inline;
+    float:left;
+    list-style: none;
+}
+
+li.button {
+    display: inline;
+    float:right;
+    list-style: none;
+    padding:0.67rem;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+.board {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    color:white;
+}
+.board .row {
+    flex: 1;
+    position: relative;
+    justify-content: center;
+    flex-direction: row;
+}
+.board .row .tile {
+    top: 0;
+    bottom: 0;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5vw;
+    font-family: impact;
+    color: #fba61d;
+    color: #ddd;
+    text-decoration: none;
+    background: linear-gradient(to top left, #008, #00f);
+    border: 3px solid #000;
+}
+
+.board .row .tile a{
+    color:white;
+    text-decoration:none;
+}
+.board .row .question-value {
+    display: block;
+}
+.board .row .tile.active {
+    border-width: 0;
+    font-size: 10vw;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    z-index: 5;
+}
+.board .row .tile.active .question-value {
+    display: none;
+}
+.team {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+.team .tile {
+    top: 0;
+    bottom: 0;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5vw;
+    font-family: impact;
+    color: #fba61d;
+    color: #ddd;
+    background: linear-gradient(to top left, #008, #00f);
+    border: 3px solid #000;
+}
+.team .question-value {
+    display: block;
+}
+.team .tile.active {
+    border-width: 0;
+    font-size: 10vw;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    z-index: 5;
+}
+.team .tile.active .question-value {
+    display: none;
+}
+
+team {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+ 
+.team .tile {
+    top: 0;
+    bottom: 0;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5vw;
+    font-family: impact;
+    color: #fba61d;
+    color: #ddd;
+    /* background: linear-gradient(150deg, #8700ff 20%,#f000ff 100%); */
+    border: 3px solid #000;
+}
+.team .question-value {
+    display: block;
+}
+.team .tile.active {
+    border-width: 0;
+    font-size: 10vw;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    z-index: 5;
+}
+.team .tile.active .question-value {
+    display: none;
+}
+
+.tile-a {top: 0;
+    bottom: 0;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5vw;
+    font-family: impact;
+    color: #fba61d;
+    color: #ddd;
+    /* background: linear-gradient(150deg, #8700ff 20%,#f000ff 100%); */
+    border: 3px solid #000;
+    background: linear-gradient(150deg, #8700ff 20%,#f000ff 100%);
+}
+
+.tile-b {
+    top: 0;
+    bottom: 0;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5vw;
+    font-family: impact;
+    color: #fba61d;
+    color: #ddd;
+    /* background: linear-gradient(150deg, #8700ff 20%,#f000ff 100%); */
+    border: 3px solid #000;
+    background: linear-gradient(150deg, #1d8cf8 20%,#3358f4 100%)
+}
+
+.tile-c {
+    top: 0;
+    bottom: 0;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5vw;
+    font-family: impact;
+    color: #fba61d;
+    color: #ddd;
+    /* background: linear-gradient(150deg, #8700ff 20%,#f000ff 100%); */
+    border: 3px solid #000;
+    background: linear-gradient(150deg, #ff4086 20%,#fd8d76 100%)
+}
+
+.tile-d {
+    top: 0;
+    bottom: 0;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5vw;
+    font-family: impact;
+    color: #fba61d;
+    color: #ddd;
+    /* background: linear-gradient(150deg, #8700ff 20%,#f000ff 100%); */
+    border: 3px solid #000;
+    background: linear-gradient(150deg, #1dcc45 20%,#42b883 100%)
+}
+
+.tile-e {
+    top: 0;
+    bottom: 0;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5vw;
+    font-family: impact;
+    color: #fba61d;
+    color: #ddd;
+    /* background: linear-gradient(150deg, #8700ff 20%,#f000ff 100%); */
+    border: 3px solid #000;
+    background: linear-gradient(150deg, #8700ff 20%,#f000ff 100%)
+}
+
+.tile-f {
+    top: 0;
+    bottom: 0;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5vw;
+    font-family: impact;
+    color: #fba61d;
+    color: #ddd;
+    /* background: linear-gradient(150deg, #8700ff 20%,#f000ff 100%); */
+    border: 3px solid #000;
+    background: linear-gradient(150deg, #0098f0 20%,#00f2c3 100%)
+}
+
+.text-question {
+    text-align:center;
+    /* top: 55%; */
+    /* left: 50%; */
+    /* position: fixed; */
+    /* transform: translate(-50%, -50%); */
+    /* margin-top: 96px;; */
+}
+
+#status0 {
+    margin-bottom:8px;
+}
+
+.ra {
+    color:green;
+}
+
+.wa {
+    color:red;
+}
+
+.pq {
+    color:yellow !important; 
+}
+
+.questionimg {
+    width:auto;
+    max-height:260px;
+    padding:16px;
+    position:relative;
+    /* background: linear-gradient(to top, #0250c5 0%, #d43f8d 100%); */
+}
+
+.post-form {
+    color:white;
+}
+
+.tileui {
+    top: 0;
+    bottom: 0;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5vw;
+    font-family: impact;
+    color: #fba61d;
+    color: #ddd;
+    /* background: linear-gradient(150deg, #8700ff 20%,#f000ff 100%); */
+    border: 3px solid #000;
+    background-color:#b0b8b2;
+}

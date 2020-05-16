@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block content %}
+<div class="banner">
+    <h1>Play And Win <br> Hello, {{ user }}. This is {{tournament.tournament_name}}
+    </h1>
+</div>
+<div class="gamecard">
+
+    <div class="container">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <center>
+                    <h5 class="card-title">Quiz</h5>
+                </center>
+                <center>
+                    <h6 class="card-subtitle mb-2 text-muted">Quiz Game</h6>
+                </center>
+                <center>
+                    <p class="card-text">A Quiz game based on general topics</p>
+                </center><br>
+                <center><button type="button" class="btn btn-primary" onclick="levelFunction()">Start Game</button>
+                    <a type="button" class="btn btn-primary" href="/master/">Logout</a>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="levels" class="levels justify-content-center" style="display:none;">
+
+    <ul class="levelsul">
+        {% for level in tournament.level_set.all %}
+        <li class="levelsli">
+            <a href="/polls/{{tournament.id}}/{{level.id}}/teams" style="text-decoration:none;"><img src="{{level.image_url}}" class="levelimg"><span style="margin-left: 12px;">{{level.level_name}}</span></a>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    <br>
+</div>
+
+
+{% endblock %}

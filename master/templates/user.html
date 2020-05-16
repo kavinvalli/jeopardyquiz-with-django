@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stacFkpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/master/welcome-master.css">
+    <title>Grand master - Jeopardy</title>
+</head>
+
+<body>
+
+        <main class="main-content bg-gray">
+                <header class="sticky-top w-100">
+                        <nav class="navbar flex-md-nowrap">
+                          <div class="navbar-logo">
+                                <div class="user-account-avatar"><img class="rounded-circle" src="https://via.placeholder.com/150" alt=""></div>    
+                         </div>
+                          <div class="d-flex text-nowrap navbar-account px-3">
+                            <div class="user-account-name pr-5">
+                             {{ user.username }}
+                            </div>
+                            <div class="dropdown float-right">
+                              <button type="button" id="dropdownUserAccount" class="btn px-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <li><a href="{% url 'logout' %}">Logout</a></li></button>
+                            </div>
+                          </div>
+                        </nav>  
+                      </header>
+            
+            
+            
+            <div class="padding-box">
+                <h1 class="ui header d-blue">
+
+                    Hello, {{ user.first_name }}
+                </h1>
+                    <h4>Good to see you. You are the grand master of the game..!
+                    <br>
+                </h4>
+            
+                <ul class="cards">
+              <li class="card">
+                <img src="../static/master/images/results.png" alt="user 1's profile image" />
+                <p></p>
+                <a href="#">Results</a>
+              </li>
+            
+              <li class="card online">
+                <img src="../static/master/images/tournament.png" alt="user 2's profile image" />
+                <p></p>
+                <a href="{% url 'jeopardy' %}">Tournaments</a>
+              </li>
+            
+              <li class="card">
+                <img src="../static/master/images/teams.png" alt="user 3's profile image" />
+                <p></p>
+                <a href="{% url 'masterteams' %}">Teams</a>
+              </li>
+            
+              <li class="card online">
+                <img src="../static/master/images/levels.png" alt="user 4's profile image" />
+                <p></p>
+                <a href="{% url 'masterlevels' %}">Levels</a>
+              </li>
+            
+              <li class="card online">
+                <img src="../static/master/images/categories.png" alt="user 5's profile image" />
+                <p></p>
+                <a href="{% url 'mastercats' %}">Categories</a>
+              </li>
+            
+              <li class="card">
+                <img src="../static/master/images/questions.png" alt="user 6's profile image" />
+                <p></p>
+                <a href="{% url 'masterquestions' %}">Questions</a>
+              </li>
+            </ul>
+            </div>
+            </main>
+
+</body>
+
+</html>

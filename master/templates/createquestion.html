@@ -1,0 +1,29 @@
+{% extends 'formbase2.html' %} {% block content %}
+<p class="login-text">Hello {{user.first_name}}</p>
+<form action="{% url 'createquestion' tournament.id level.id category.id %}" method="post">
+    {% csrf_token %}
+    <div class="form-field">
+        <label for="question_number">Question Number</label>
+        <input type="number" placeholder="Question Number" name="question_number">
+    </div>
+    <div class="form-field">
+        <label for="question_text">Question Text</label>
+        <input type="text" placeholder="Question Text" name="question_text">
+    </div>
+    <div class="form-field">
+        <label for="image_url">Image Url(if it is an image based question)</label>
+        <input type="text" placeholder="Image Url" name="image_url">
+    </div>
+    <div class="form-field">
+        <label for="marks_alloted">Marks Alloted</label>
+        <input type="text" placeholder="Marks Alloted" name="marks_alloted">
+    </div>
+    <div class="form-field">
+        <label for="answer">Answer</label>
+        <input type="text" placeholder="Answer" name="answer">
+    </div>
+    <div class="form-field">
+        <button type="submit" class="login-btn">Submit</button>
+    </div>
+</form>
+{% endblock %}

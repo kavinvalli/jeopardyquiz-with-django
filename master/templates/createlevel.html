@@ -1,0 +1,21 @@
+{% extends 'formbase2.html' %} {% block content %}
+<p class="login-text">Hello {{user.first_name}}</p>
+<form action="{% url 'createlevel' tournament_id %}" method="post">
+    {% csrf_token %}
+    <div class="form-field">
+        <label for="level_name">Level Name:*</label>
+        <input type="text" placeholder="Level Name" name="level_name">
+    </div>
+    <div class="form-field">
+        <label for="image_url">Image Url</label>
+        <input type="text" placeholder="Image Url" name="image_url">
+    </div>
+    <div class="form-field">
+        <label for="negative_marking">Negative Marking*(Needs to be a number/0)</label>
+        <input type="text" placeholder="Tournament Name" name="negative_marking">
+    </div>
+    <div class="form-field">
+        <button type="submit" class="login-btn">Submit</button>
+    </div>
+</form>
+{% endblock %}

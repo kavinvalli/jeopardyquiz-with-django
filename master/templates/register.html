@@ -1,0 +1,33 @@
+{% extends 'formbase2.html' %} {% block content %} {% if message %}
+<p class="login-text">
+    {{ message }}
+</p>
+{% else %}
+<p class="login-text">Register</p>
+{% endif %}
+
+<form action="/master/register" method="post">
+    {% csrf_token %}
+    <div class="form-field">
+        <label for="first_name">First Name</label>
+        <input type="text" name="first_name" />
+    </div>
+    <div class="form-field">
+        <label for="username">Username</label>
+        <input type="text" name="username" />
+    </div>
+    <div class="form-field">
+        <label for="password">Password</label>
+        <input type="password" name="password" />
+    </div>
+    <div class="form-field">
+        <label for="email_id">Email Id</label>
+        <input type="text" name="email_id" />
+    </div>
+
+    <div class="form-field">
+        <button type="submit" class="login-btn">Login</button>
+    </div>
+</form>
+
+{% endblock %}

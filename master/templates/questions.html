@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<div class="bannercat">
+<h1>{{ category.category_name }}- Choose the Question</h1>
+</div>
+<div style="padding:18px;">
+<ul>
+    <div class="container">
+        <table class="table">
+    <thead>
+      <tr>
+        <th>Question No</th>
+        <th>Marks</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+
+        {% for question in category.question_set.all %}
+        <tbody>
+      <tr>
+        <td><a href="/polls/{{question.level.id}}/{{category.id}}/{{question.id}}">Question no. {{ question.question_number }}</a></td>
+         <td> <a href="/polls/{{question.level.id}}/{{category.id}}/{{question.id}}">{{question.marks_alloted}} marks</a></td>
+
+          {% if question.status == "RA" %}
+          <td style="color:green">Right Answer</td>
+          {% elif question.status == "WA" %}
+          <td style="color:red">Wrong</td>
+          {% else %}
+        <td style="color:yellow">Not yet Opened</td>
+          {% endif %}
+      </tr>
+
+    </tbody>
+            {% endfor %}
+              </table>
+        <a href='/polls/{{category.level.id}}'><button type="button" class="btn btn-success">Next Category</button></a>
+    </div>
+
+
+
+
+
+</div>
+</ul>
+</html>
+{% endblock %}

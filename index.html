@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="banner">
+
+	<div class="heading">Jeopardy</div>
+    <h1>Play And Win</h1>
+</div>
+<div class="gamecard">
+
+    <div class="container">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <center>
+                    <h5 class="card-title">Jeopardy</h5>
+                </center>
+                <center>
+                    <p class="card-text">Jeopardy game based on general topics</p>
+                </center><br>
+                <center><button type="button" class="btn btn-primary" onclick="levelFunction()">Start Game</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="levels" class="levels justify-content-center" style="display:none;">
+    
+    <ul class="levelsul">
+        {% for level in levels %}
+        <li class="levelsli"><a href="/polls/{{level.id}}/teams" style="text-decoration:none;"><img src="{{level.image_url}}" class="levelimg"><span style="margin-left: 12px;">{{level.level_name}}</span></a></a></li>
+        {% endfor %}
+    </ul>
+    <br>
+</div>
+
+
+{% endblock %}

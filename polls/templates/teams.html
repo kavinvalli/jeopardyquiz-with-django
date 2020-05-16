@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        .card {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 4px;
+        }
+        
+        body {
+            padding: 10px;
+            text-align: center;
+            justify-content: center;
+            background: linear-gradient(to bottom, #0250c5 0%, #d43f8d 100%);
+            font-family: impact;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 3.5vw;
+        }
+        
+        .form-group {
+            text-align: center;
+            padding-top: 18px;
+        }
+        
+        .btn {
+            padding: 0px !important;
+        }
+    </style>
+    <script>
+        { %
+            if error != None %
+        }
+        alert('Please choose the Team going to play'); { % endif %
+        }
+    </script>
+</head>
+
+<body>
+    <h1> {{user.first_name}}, Please Select Team</h1>
+    <!-- <a href="/polls/{{level.id}}/">{{team.team_name}}</a> -->
+    <div class="row justify-content-center">
+        {%for team in teams%}
+        <form action="/polls/{{tournament.id}}/{{level.id}}/teams/" method="post">
+            {% csrf_token %}
+
+            <div class="card" style="width: 250px;">
+                <button class="btn btn-light" id="status1" name="teamid" value="{{team.id}}">
+                    <img src="{{team.images}}" class="card-img-top" alt="..." width="250px" height="250px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{team.team_name}}</h5>
+                        <p class="card-text">
+                        </p>
+                    </div>
+                </button>
+            </div>
+
+        </form>
+
+        {% endfor %}
+
+    </div>
+
+
+
+</body>
+
+</html>

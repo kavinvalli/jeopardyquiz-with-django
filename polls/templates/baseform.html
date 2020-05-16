@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="bannercat">
+<h1>Question no. {{ question.question_number }}.<br>
+    {{question.question_text}}</h1>
+    </div>
+<div style="text-align:center;">
+<br>
+    <img src="{{question.image_url}}" alt="" style="width:500px;height:auto;">
+<br>
+    <br>
+{% base content %}
+    {% endblock %}
+    <a class="btn btn-default" href="{% url 'post_edit' pk=question.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <button type="button" class="btn btn-success" onclick="myFunction();buttonFunction()">Show Answer/Option</button>
+<script>
+
+
+function myFunction() {
+  var x = document.getElementById("answers");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function buttonFunction() {
+  var y = document.getElementById("hi");
+  if (y.style.display === "none") {
+    y.style.display = "block";
+  } else {
+    y.style.display = "none";
+  }
+}
+
+function nextFunction() {
+  var y = document.getElementById("next");
+  if (y.style.display === "none") {
+    y.style.display = "block";
+  } else {
+    y.style.display = "none";
+  }
+}
+</script>
+    <div id="answers" style="display: none;"><br>
+    <ul>
+        {% for answer in question.answer_set.all %}
+        {% if answer.option2 == "" %}
+        <b><li>{{answer.option1_answer}}</li></b>
+        {% else %}
+        <b><li>{{answer.option2}}</li></b>
+        <b><li>{{answer.option3}}</li></b>
+        <b><li>{{answer.option4}}</li></b>
+        {% endif %}
+        {% endfor %}
+    </ul>
+
+        </div>
+
+    <div id="hi" style="display:none;">
+    <button type="button" class="btn btn-danger" onclick="nextFunction()">Wrong</button>
+        <button type="button" class="btn btn-success" onclick="nextFunction()">Right</button>
+    </div>
+    <div id="next" style="display:none"><br>
+    <a href="/polls/{{question.level.id}}/{{question.category.id}}"><button type="button" class="btn btn-success">Next Question</button></a>
+        <a href="/polls/{{question.level.id}}/"><button type="button" class="btn btn-success">Next Category</button></a>
+<!--        <a href='/polls/{{question.level.id}}/{{question.category.id}}'><button type="button" class="btn btn-success">Next Category</button></a>-->
+        </div><!-- Optional JavaScript -->
+
+{% endblock %}
+
+
+</div>

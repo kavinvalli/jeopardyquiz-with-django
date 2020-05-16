@@ -1,0 +1,5 @@
+if request.POST.get('teamstatus'):
+            question.team_choose = request.POST.get('teamstatus')
+            print('for save' + question.team_choose)
+            question.save()
+            print('after save ' + question.team_choose)

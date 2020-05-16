@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    html {
+        height: 100%;
+    }
+    
+    body {
+        background: linear-gradient(to top, #0250c5 0%, #d43f8d 100%);
+        box-sizing: content-box;
+        box-sizing: border-box;
+        font-family: Geneva, sans-serif;
+        height: 100%;
+    }
+    
+    .login-text {
+        text-align: center;
+        margin-top: 25px;
+        font-weight: 100;
+        font-size: 0.87em;
+        color: #32b984;
+    }
+    
+    .login-panel {
+        background: #fff;
+        width: 350px;
+        height: auto;
+        margin: 25px auto;
+        position: relative;
+        box-shadow: 2px 5px 15px #444;
+    }
+    
+    .login-panel form {
+        margin: 50px 0;
+    }
+    
+    .login-panel .form-field {
+        margin: 25px 0;
+    }
+    
+    .login-panel label,
+    .login-panel input,
+    .login-panel select {
+        display: block;
+        margin: 0px auto;
+        width: 200px;
+    }
+    
+    .login-panel label {
+        color: #aaa;
+    }
+    
+    .login-panel input {
+        padding: 5px 2px;
+        border: none;
+        font-size: 1.1em;
+        font-weight: 300;
+        border-bottom: 2px solid #ccc;
+        transition: border 250ms ease-in;
+    }
+    
+    .login-panel select {
+        padding: 5px 2px;
+        border: none;
+        font-size: 1.1em;
+        font-weight: 300;
+        /* border-bottom: 2px solid #ccc; */
+        transition: border 250ms ease-in;
+        background-color: white;
+    }
+    
+    .login-panel input:focus {
+        outline: none;
+        border-bottom: 2px solid #605d7f;
+    }
+    
+    .login-title {
+        text-align: center;
+        padding-top: 25px;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+    
+    .login-title span {
+        font-weight: 100;
+        font-size: 0.9em;
+        color: #605d7f;
+    }
+    
+    .login-btn {
+        background: #32b984;
+        color: #fff;
+        font-size: 0.9em;
+        border: none;
+        padding: 5px 20px;
+        position: absolute;
+        right: 70px;
+        border-radius: 3px;
+        border-bottom: 1px solid #227f5b;
+        transition: background 150ms ease-in;
+        /* margin-bottom: 15px; */
+    }
+    
+    .login-btn:hover {
+        cursor: pointer;
+        background: #227f5b;
+    }
+    
+    .login-footer {
+        /* position: absolute; */
+        width: 100%;
+        bottom: 0;
+        background: #f9f9f9;
+        padding: 25px 0;
+    }
+    
+    .login-footer p {
+        text-align: center;
+        font-size: 0.9em;
+    }
+</style>
+
+<body>
+    <div class="login-panel">
+        <h1 class="login-title">
+            Jeopardy<span class="light">Play</span>
+        </h1>
+        {% block content %} {% endblock %}
+        <div class="login-footer">
+            <p>Copyright 2020 www.kavin.me</p>
+        </div>
+    </div>
+</body>
+
+</html>

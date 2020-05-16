@@ -1,0 +1,6 @@
+<form action="{% url 'existing' %}" method="post">
+    {% csrf_token %}
+
+    <input type="submit">
+    <a href="/polls/tournament/existing">Want to continue an existing Tournament?</a>
+</form>

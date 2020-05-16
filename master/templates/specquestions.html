@@ -1,0 +1,152 @@
+<!-- <!DOCTYPE html> -->
+<html>
+{% load static %}
+
+<head>
+  <link rel="stylesheet" href="{% static 'polls/category.css' %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <style>
+    .tile {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top">
+    <li class="catmark">
+      <h1>{{category.category_name}} for {{question.marks_alloted}}</h1>
+    </li>
+    <li class="button"><button type="button" class="btn btn-success" onclick="myFunction();buttonFunction()">Show
+        Answer/Option</button></li>
+  </div>
+  <div class="text-question">
+    <h1>{{question.question_text}}</h1>
+    <br>
+    {% if question.image_url is blank %}
+    <span></span>
+    {% else %}
+    <img src="{{question.image_url}}" alt="" class="questionimg">
+    {% endif %}
+    <br>
+    <br>
+
+
+
+    <script>
+
+
+      function myFunction() {
+        var x = document.getElementById("answers");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+
+      function buttonFunction() {
+        var y = document.getElementById("hi");
+        if (y.style.display === "none") {
+          y.style.display = "block";
+        } else {
+          y.style.display = "none";
+        }
+      }
+
+      function nextFunction() {
+        var y = document.getElementById("next");
+        if (y.style.display === "none") {
+          y.style.display = "block";
+        } else {
+          y.style.display = "none";
+        }
+      }
+    </script>
+    <div id="answers" style="display: none;"><br>
+      <ul>
+        {% for answer in question.answer_set.all %}
+        {% if answer.option2 == "" %}
+        <b>
+          <li>{{answer.option1_answer}}</li>
+        </b>
+        {% else %}
+        <b>
+          <li>{{answer.option1_answer}}</li>
+        </b>
+        <b>
+          <li>{{answer.option2}}</li>
+        </b>
+        <b>
+          <li>{{answer.option3}}</li>
+        </b>
+        <b>
+          <li>{{answer.option4}}</li>
+        </b>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+
+    <!-- please call the right method here to save the data and redirect on the same page with next question -->
+    <form method="post" class="post-form">
+
+      {% csrf_token %}
+
+      <li>
+        <!-- <input type="radio" id="status0" name="status" value="PQ"> -->
+        <button id="status0" name="status" value="PQ" class="btn btn-warning">Passes Question</button>
+
+      </li>
+      <!-- <button type="submit" class="save btn btn-warning">Next</button> -->
+      <div id="hi" style="display:none;">
+
+        <ul>
+          <li style="display:inline;display:none">
+            <input type="radio" id="status1" name="status" value="NA">
+            Not Answered
+          </li>
+
+          <li style="display:inline;">
+            <!-- <input type="radio" id="status2" name="status" value="RA"> -->
+            <button class="btn btn-success" id="status2" name="status" value="RA">Right Answer</button>
+          </li>
+          <li style="display:inline;">
+            <!-- <input type="radio" id="status3" name="status" value="WA"> -->
+            <button type="button" class="btn btn-danger" id="status3" name="status" value="WA">Wrong Answer</button>
+
+          </li>
+        </ul>
+
+    </form>
+
+
+    <!-- <a class="btn btn-warning" href="{% url 'post_edit' pk=question.id %}">Right/Wrong</a>-->
+
+  </div>
+  <div id="next" style="display:none"><br>
+    <a href="/polls/{{question.level.id}}/{{question.category.id}}"><button type="button" class="btn btn-success">Next
+        Question</button></a>
+    <a href="/polls/{{question.level.id}}/"><button type="button" class="btn btn-success">Next Category</button></a>
+    <!--        <a href='/polls/{{question.level.id}}/{{question.category.id}}'><button type="button" class="btn btn-success">Next Category</button></a>-->
+  </div><!-- Optional JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+
+
+  </div>
+
+</body>
+
+</html>
