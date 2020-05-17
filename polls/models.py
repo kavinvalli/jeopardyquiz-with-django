@@ -59,6 +59,7 @@ class Question(models.Model):
     question_number = models.IntegerField()
     image_url = models.CharField(max_length=2083, blank=True)
     marks_alloted = models.IntegerField()
+    time_alloted = models.IntegerField(default=60)
     team_choose = models.ForeignKey(Team, on_delete=models.CASCADE, default=None, null=True, blank=True)
     pass_count = models.IntegerField()
     status = models.CharField(

@@ -15,4 +15,5 @@ urlpatterns = [
     path('<int:tournament_id>/<int:level_id>/<int:category_id>/', views.questions, name='question'),
     path('<int:tournament_id>/<int:level_id>/<int:category_id>/<int:question_id>', views.specquestion, name='specquestion'),
     path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
+    path('<int:question_id>/', views.questionstatus, name="questionstatus")
 ]

@@ -6,22 +6,43 @@
   <link rel="stylesheet" href="{% static 'polls/category.css' %}">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <style>
-      .tile {
-        width:100%;
+  <style>
+    .tile {
+      width: 100%;
+    }
+  </style>
+  <script>
+    var sec = {{time}};
+    var time = setInterval(myTimer, 1000);
+
+    function myTimer() {
+      document.getElementById('timer').innerHTML = sec + " sec left";
+      sec--;
+      if (sec == -1) {
+        clearInterval(time);
+        document.forms['formq'].submit('POST');
+        // alert("Time out!! :(");
+        
       }
-    </style>
+    }
+  </script>
 </head>
 
 <body>
-  
+
   <div class="top">
-    <li class="catmark"><h1 style="font-size: 2.5vw; color: #ffffff; font-family: impact;">{{category.category_name}} for {{question.marks_alloted}} points</h1></li>
-    <li class="button"><button type="button" class="btn btn-success" onclick="myFunction();buttonFunction();passFunction()">Show Answer/Option</button></li>
+    <input type="hidden" data-timer="{{question.time_alloted}}" id="timertime">
+    <li class="catmark">
+      <h1 style="font-size: 2.5vw; color: #ffffff; font-family: impact;">{{category.category_name}} for
+        {{question.marks_alloted}} points</h1>
+    </li>
+    <li class="button"><button type="button" class="btn btn-success"
+        onclick="myFunction();buttonFunction();passFunction()">Show Answer/Option</button></li>
   </div>
   <div class="text-question">
     <h1 style="font-size: 3.5vw; color: #ffffff; font-family: impact;">{{question.question_text}}</h1>
     <br>
+    Time : <span id="timer"></span>
     {% if question.image_url is blank %}
     <span></span>
     {% else %}
@@ -31,7 +52,7 @@
     <br>
 
 
-    
+
     <script>
 
 
@@ -42,6 +63,8 @@
         } else {
           x.style.display = "none";
         }
+        document.getElementById('timer').innerHTML = sec + " sec left";
+        clearInterval(time);
       }
 
       function buttonFunction() {
@@ -60,6 +83,8 @@
         } else {
           y.style.display = "none";
         }
+        document.getElementById('timer').innerHTML = sec + " sec left";
+        clearInterval(time);
       }
 
 
@@ -75,27 +100,27 @@
     </script>
     <div id="answers" style="display: none;"><br>
       <ul>
-        
+
         <b>
           <li style="font-size: 2.5vw; color: #ffffff; font-family: impact;">{{question.answer}}</li>
         </b>
-        
-        
+
+
       </ul>
     </div>
 
 
     <!-- please call the right method here to save the data and redirect on the same page with next question -->
-    <form method="post" class="post-form">
+    <form method="post" class="post-form" id="answerform" name="formq" action="{% url 'questionstatus' question.id %}">
 
       {% csrf_token %}
-<div id="pass" style="display:block">
-      <li>
-        <!-- <input type="radio" id="status0" name="status" value="PQ"> -->
-        <button id="status0" name="status" value="PQ" class="btn btn-warning">Passes Question</button>
+      <div id="pass" style="display:block">
+        <li>
+          <!-- <input type="radio" id="status0" name="status" value="PQ"> -->
+          <button id="status0" name="status" value="PQ" class="btn btn-warning">Passes Question</button>
 
-      </li>
-    </div>
+        </li>
+      </div>
       <!-- <button type="submit" class="save btn btn-warning">Next</button> -->
       <div id="hi" style="display:none;">
 

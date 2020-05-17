@@ -169,8 +169,39 @@ def specquestion(request, category_id, level_id, question_id,tournament_id):
     team = Team.objects.all()
     teamchosen = request.session.get("teamplay")
     teamchoose = Team.objects.get(pk=teamchosen)
+    
+    return render(request, 'specquestions.html', {'question': question, 'level': level, 'team':team, 'category':category, 'teamchoose':teamchoose,'t':t, 'time':question.time_alloted})
+
+def questionstatus(request, question_id):
     if request.method == "POST":
-         if request.POST.get('status'):
+        t = request.session.get("tournament")
+        tournament = Tournament.objects.get(pk=t)
+        question = Question.objects.get(pk=question_id)
+        teamchosen = request.session.get("teamplay")
+        teamchoose = Team.objects.get(pk=teamchosen)
+        if request.POST.get('status')==None:
+            question.status="PQ"
+            print('for save '+question.status)
+            question.save()
+            print('after save ' + question.status)
+            if question.status=="RA":
+                teamchoose.team_points += question.marks_alloted
+            elif question.status=="PQ":
+                question.pass_count += 1
+                if question.pass_count == 1:
+                    question.marks_alloted = question.marks_alloted/2
+                elif question.pass_count >= 2:
+                    question.marks_alloted = question.marks_alloted
+                teamchoose.team_points += 0
+            elif question.status=="WA":
+                teamchoose.team_points -= level.negative_marking
+            elif question.status=="NA":
+                teamchoose.team_points += 0
+            question.save()
+            teamchoose.save()
+            url="/polls/"+str(tournament.id)+"/"+str(question.level.id)+'/teams'
+            return redirect(url)
+        else:
             question.status=request.POST.get('status')
             print('for save '+question.status)
             question.save()
@@ -190,11 +221,8 @@ def specquestion(request, category_id, level_id, question_id,tournament_id):
                 teamchoose.team_points += 0
             question.save()
             teamchoose.save()
-            url="/polls/"+str(tournament.id)+"/"+str(level_id)+'/teams'
+            url="/polls/"+str(tournament.id)+"/"+str(question.level.id)+'/teams'
             return redirect(url)
-    return render(request, 'specquestions.html', {'question': question, 'level': level, 'team':team, 'category':category, 'teamchoose':teamchoose,'t':t})
-
-
 
 def post_edit(request, pk, ):
     status = get_object_or_404(Question, pk=pk)
