@@ -25,7 +25,7 @@ SECRET_KEY = 'oa#ifwfq5r!((vzfyver6hm$(gbp!oh#4t2q1vjsgz$9i=p0dt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['180.151.73.194', 'kavin.me', 'www.kavin.me', 'localhost']
+ALLOWED_HOSTS = ['180.151.73.194', 'kavin.me', 'www.kavin.me', 'localhost', '127.0.0.1', '192.168.0.126']
 
 
 # Application definition

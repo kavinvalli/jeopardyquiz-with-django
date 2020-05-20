@@ -24,6 +24,8 @@
                             </div>
                             <div class="dropdown float-right">
                               <button type="button" id="dropdownUserAccount" class="btn px-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <li><a href="{% url 'tournamentwizard' user.username %}">Create through Wizard</a></li></button>
+                                <button type="button" id="dropdownUserAccount" class="btn px-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <li><a href="{% url 'logout' %}">Logout</a></li></button>
                             </div>
                           </div>

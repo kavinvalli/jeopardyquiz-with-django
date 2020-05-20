@@ -429,3 +429,162 @@ def removeteam(request, team_id):
     url = "/master/login/teams"
     return redirect(url)
 
+def tournamentwizard(request, username):
+    user = request.user
+    context = {
+        "user":user
+    }
+    if request.method == "POST":
+        tournament_name = request.POST.get("tournament_name")
+        t = Tournament(tournament_name=tournament_name,user_id=user)
+        t.save()
+        t = t.id
+        request.session["tournament"]=t
+        url = "/master/"+str(username)+"/"+str(t)+"/levelwizard"
+        return redirect(url)
+    return render(request, "wizard.html", context)
+
+def levelwizard(request, username, tournament_id):
+    tournament = tournament_id
+    tournament = Tournament.objects.get(pk=tournament)
+    context = {
+            'tournament': tournament
+        }
+    if request.method == "POST":
+        level = request.POST.getlist("level_name")
+        image = request.POST.getlist("image_url")
+        negative = request.POST.getlist("negative_marking")
+        seen=[]
+        print(str(level))
+        for i in level: 
+            print(i)
+            if i in seen:
+                url = "/master/"+username+"/"+tournament_id+"/levelwizard"
+                return render(request, 'wizardlevels.html', {"message":"You can't have two levels with the same name", "tournament":tournament })
+            else:
+                seen.append(i)
+                level_index = level.index(i)
+                image_url = image[level_index]
+                negative_mark = negative[level_index]
+                tournament = tournament_id
+                tournament = Tournament.objects.get(pk=tournament)
+                l = Level(level_name=i,image_url=image_url,negative_marking=int(negative_mark),tournament_id=tournament)
+                l.save()
+        url = "/master/"+str(username)+"/"+str(tournament.id)+"/categorywizard"
+        return redirect(url)
+    return render(request, 'wizardlevels.html', context)
+
+def categorywizard(request, username, tournament_id):
+    tournament_id = tournament_id
+    tournament = Tournament.objects.get(pk=tournament_id)
+    context = {
+        "tournament":tournament
+    }
+    if request.method == "POST":
+        levelsid = request.POST.getlist("level_id")
+        categoriesname = request.POST.getlist("category_name")
+        tournament_id = tournament_id
+        tournament = Tournament.objects.get(pk=tournament_id)
+        seen = []
+        for level in levelsid:
+            if level == None:
+                return render(request, 'wizardcategory.html', {"message":"You can't have a category without a level", "tournament":tournament })
+            else:
+                for i in range(0, len(levelsid)):
+                    levelsid[i] = int(levelsid[i])
+                    for category in categoriesname:
+                        if category in seen:
+                            url = "/master/"+username+"/"+tournament_id+"/categorywizard"
+                            return render(request, 'wizardcategory.html', {"message":"You can't have two categories with the same name (Eg: If one category is sport try the other's name to be something like Sports Time!)", "tournament":tournament })
+                        else:
+                            seen.append(category)
+                            category_index = categoriesname.index(category)
+                            level_id_present = levelsid[category_index]
+                            level = Level.objects.get(pk=level_id_present)
+                            c = Category(category_name=category, level=level, tournament_id=tournament)
+                            c.save()
+                    url = "/master/"+str(username)+"/"+str(tournament.id)+"/questionwizard"
+                    return redirect(url)
+    return render(request, 'wizardcategory.html', context)
+
+def questionwizard(request, username, tournament_id):
+    tournament_id = tournament_id
+    tournament = Tournament.objects.get(pk=tournament_id)
+    context = {
+        "tournament": tournament,
+    }
+    if request.method == "POST":
+        levelsid = request.POST.getlist("level_id")
+        categoriesid = request.POST.getlist("category_id")
+        question_texts = request.POST.getlist("question_text")
+        image_urls = request.POST.getlist("image_url")
+        question_marks = request.POST.getlist("marks_alloted")
+        answers = request.POST.getlist("answer")
+        times = request.POST.getlist("time")
+        tournament_id = tournament_id
+        tournament = Tournament.objects.get(pk=tournament_id)
+        seen = []
+        for level in levelsid:
+            if level == None:
+                return render(request, 'wizardcategory.html', {"message":"You can't have a category without a level", "tournament":tournament })
+            else:
+                for i in range(0, len(levelsid)):
+                    levelsid[i] = int(levelsid[i])
+                    for category in categoriesid:
+                        if category == None:
+                            return render(request, 'wizardcategory.html', {"message":"You can't have a question without a category", "tournament":tournament })
+                        else:
+                            for t in range(0, len(times)):
+                                times[t] = int(times[t])
+                                for c in range(0, len(categoriesid)):
+                                    categoriesid[c] = int(categoriesid[c])
+                                    for m in range(0, len(question_marks)):
+                                        question_marks[m] = int(question_marks[m])
+                                        for question_text in question_texts:
+                                            if question_text in seen:
+                                                url = "/master/"+username+"/"+tournament_id+"/questionwizard"
+                                                return render(request, 'wizardquestions.html', {"message":"You can't have two questions with the same text", "tournament":tournament })
+                                            else:
+                                                seen.append(question_text)
+                                                question_index = question_texts.index(question_text)
+                                                level_id_present = levelsid[question_index]
+                                                level = Level.objects.get(pk=level_id_present)
+                                                categories_id_present = categoriesid[question_index]
+                                                category = Category.objects.get(pk=categories_id_present)
+                                                image_url = image_urls[question_index]
+                                                question_mark = question_marks[question_index]
+                                                answer = answers[question_index]
+                                                time_alloted = times[question_index]
+                                                q = Question(question_text=question_text, question_number=0, tournament_id=tournament,level=level,category=category, image_url=image_url,marks_alloted=question_mark, time_alloted=time_alloted, pass_count=0)
+                                                q.save()
+                                        url = "/master/"+str(username)+"/"+str(tournament.id)+"/teamwizard"
+                                        return redirect(url)
+    return render(request, "wizardquestions.html", context)
+
+def teamwizard(request, username, tournament_id):
+    tournament_id = tournament_id
+    tournament = Tournament.objects.get(pk=tournament_id)
+    context = {
+        "tournament": tournament
+    }
+    if request.method == "POST":
+        team = request.POST.getlist("team_name")
+        image = request.POST.getlist("image_url")
+        seen=[]
+        print(str(team))
+        for i in team: 
+            print(i)
+            if i in seen:
+                url = "/master/"+username+"/"+tournament_id+"/teamwizard"
+                return render(request, 'wizardteams.html', {"message":"You can't have two teams with the same name", "tournament":tournament })
+            else:
+                seen.append(i)
+                team_index = team.index(i)
+                image_url = image[team_index]
+                tournament = tournament_id
+                tournament = Tournament.objects.get(pk=tournament)
+                t = Team(tournament_id=tournament, team_name=i,images=image_url)
+                t.save()
+        url = "/master"
+        return redirect(url)
+    return render(request, 'wizardteams.html', context)

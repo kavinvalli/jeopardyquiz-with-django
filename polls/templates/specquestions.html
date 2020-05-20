@@ -10,11 +10,27 @@
     .tile {
       width: 100%;
     }
+    .timerplace {
+      color: red;
+      font-size: 3.5vw;
+      font-family: impact;
+    }
   </style>
   <script>
     var sec = {{time}};
     var time = setInterval(myTimer, 1000);
-
+    {% ifequal question.status "PQ" %}
+    function myTimer() {
+      var sec = {{time}}/2;
+      document.getElementById('timer').innerHTML = sec + " sec left";
+      sec--;
+      if (sec == -1) {
+        clearInterval(time);
+        document.forms['formq'].submit('POST');
+        // alert("Time out!! :(");
+      }
+    }
+    {% else %}
     function myTimer() {
       document.getElementById('timer').innerHTML = sec + " sec left";
       sec--;
@@ -22,9 +38,9 @@
         clearInterval(time);
         document.forms['formq'].submit('POST');
         // alert("Time out!! :(");
-        
       }
     }
+    {% endifequal %}
   </script>
 </head>
 
@@ -42,7 +58,9 @@
   <div class="text-question">
     <h1 style="font-size: 3.5vw; color: #ffffff; font-family: impact;">{{question.question_text}}</h1>
     <br>
-    Time : <span id="timer"></span>
+    <div class="timerplace">
+      Time : <span id="timer"></span>
+    </div>
     {% if question.image_url is blank %}
     <span></span>
     {% else %}

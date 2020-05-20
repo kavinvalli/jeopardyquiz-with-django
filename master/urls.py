@@ -40,5 +40,10 @@ urlpatterns = [
     path("activate/<uidb64>/<token>", views.activate_account, name="activate"),
     path("forgotpassword", views.forgotpassword, name="forgotpassword"),
     path("passwordforgot/<uidb64>/<token>", views.password_reset_check, name="passwordreset"),
-    path("<username>/newpasswordreset", views.newpassword_reset, name="newpassword_reset")
+    path("<username>/newpasswordreset", views.newpassword_reset, name="newpassword_reset"),
+    path("<username>/tournamentwizard", views.tournamentwizard, name="tournamentwizard"),
+    path("<username>/<tournament_id>/levelwizard", views.levelwizard, name="levelwizard"),
+    path("<username>/<tournament_id>/categorywizard", views.categorywizard, name="categorywizard"),
+    path("<username>/<tournament_id>/questionwizard", views.questionwizard, name="questionwizard"),
+    path("<username>/<tournament_id>/teamwizard", views.teamwizard, name="teamwizard"),
 ]
